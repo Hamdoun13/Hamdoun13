@@ -16,7 +16,7 @@ using namespace std;
 
 int main()
 {
-    Mat img = imread("dark_image.jpg");
+    Mat img = imread("C:\\Users\\HAMAMSI\\Documents\\TP1\\TP1\\Lion.png");
 
     //string character = "A";
     const unsigned char character = 0x41;
@@ -25,14 +25,14 @@ int main()
     bitset<8> binaryValue(character);
 
     int i, j;
-    for (j = 10; j < img.cols; j = j + 10)
+    for (j = 10; j <= 26*10; j = j + 10)
     {
-        const unsigned char m = character2[j - 10];
+        const unsigned char m = character2[j/10 - 1];
         bitset<8> binaryValue2(m);
 
 
 
-        for (i = 10; i < img.rows; i = i + 10)
+        for (i = 10; i <= 80; i = i + 10)
         {
 
             Vec3b& Color = img.at<Vec3b>(i, j);
@@ -60,3 +60,4 @@ int main()
     imwrite("IMAGE", img);
     waitKey(0);
 }
+
