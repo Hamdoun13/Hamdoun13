@@ -1,0 +1,62 @@
+#include <opencv2/opencv.hpp>
+#include <iostream>
+#include <bitset>
+
+#include <iostream>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+#include <ctime>
+#include <chrono>
+#include <sstream>
+
+
+using namespace cv;
+using namespace std;
+
+int main()
+{
+    Mat img = imread("C:\\Users\\HAMAMSI\\Documents\\TP1\\TP1\\Lion.png");
+
+    //string character = "A";
+    const unsigned char character = 0x41;
+    const unsigned char character2[26] = { 0x41,0x42,0x43,0x44,0x45,0x46,0x47,0x48,0x49,0x4A,0x4B,0x4C,0x4D,0x4E,0x4F,0x50,0x51,0x52,0x53,0x54,0x55,0x56,0x57,0x58,0x59,0x5A };
+
+    bitset<8> binaryValue(character);
+
+    int i, j;
+    for (j = 10; j <= 26*10; j = j + 10)
+    {
+        const unsigned char m = character2[j/10 - 1];
+        bitset<8> binaryValue2(m);
+
+
+
+        for (i = 10; i <= 80; i = i + 10)
+        {
+
+            Vec3b& Color = img.at<Vec3b>(i, j);
+
+
+            if (binaryValue2[(i / 10) - 1] == 1)
+            {
+                Color[0] = 255;
+                Color[1] = 255;
+                Color[2] = 255;
+            }
+            /*else
+            {
+            Color[0] = 0 + (rand() % 144);
+            Color[1] = 0 + (rand() % 189);
+            Color[2] = 0 + (rand() % 152);
+            }
+            */
+        }
+
+    }
+
+    imshow("image", img);
+    waitKey(0);
+    imwrite("IMAGE", img);
+    waitKey(0);
+}
